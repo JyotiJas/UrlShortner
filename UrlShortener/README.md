@@ -7,60 +7,70 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Shorten long URLs into unique short codes.
+- Decode short URLs back to their original long URLs.
+- Uses Laravel framework with API endpoints.
+- Stores short URLs temporarily in cache.
+- Includes test cases for core functionalities.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation Guide
+## Step 1: Clone the Repository
+git clone https://github.com/JyotiJas/UrlShortener.git
+cd UrlShortener
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Step 2: Install Dependencies
+composer install
 
-## Learning Laravel
+## Step 3: Set Up Environment Variables
+Copy the .env.example file and rename it to .env:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+cp .env.example .env
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Step 4: Start the Laravel Server
+php artisan serve
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## API Endpoints
+## Encode a URL (Shorten a Long URL)
 
-## Laravel Sponsors
+Endpoint:
+POST /api/encode
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Example Request (JSON Body):
 
-### Premium Partners
+{
+  "url": "https://www.example.com/some/long/path?query=value"
+}
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Example Response:
 
-## Contributing
+{
+  "original_url": "https://www.example.com/some/long/path?query=value",
+  "short_url": "http://127.0.0.1:8000/abcd12"
+}
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Decode a Short URL (Retrieve Original URL)
 
-## Code of Conduct
+Endpoint: 
+GET /api/decode/{short_code}
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Example Request:
+GET /api/decode/abcd12
 
-## Security Vulnerabilities
+Example Response:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+{
+  "original_url": "https://www.example.com/some/long/path?query=value"
+}
 
-## License
+## Running Tests
+php artisan test
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Technologies Used
+
+- Laravel (PHP Framework)
+- Cache (Laravel Cache Driver)
+- Composer (Dependency Manager)
+- GitHub (Version Control)
